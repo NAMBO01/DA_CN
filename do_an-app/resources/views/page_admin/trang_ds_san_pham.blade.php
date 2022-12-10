@@ -59,7 +59,6 @@
                                         <td><img src="/images/hinh_sp/{{ $san_pham->hinh }}" style="height:70px;"
                                                 alt=""></td>
 
-                                        <td><img height="90px" src="/images/hinh_sp/{{ $san_pham->hinh }}" alt=""></td>
 
                                         <td>{{ $san_pham->ten_nha_san_xuat }}</td>
                                         <td>{{ $san_pham->noi_bat ? 1 : 0 }}</td>

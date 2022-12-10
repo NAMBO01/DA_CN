@@ -113,4 +113,10 @@ class AdminController extends Controller
             ->with('tong_so_luong', $tong_so_luong)
             ->with('khach_hang', $khach_hang);
     }
+    function logout_admin(Request $request)
+    {
+        Session::forget('user_info');
+
+        return redirect($request->server('HTTP_REFERER'), 302);
+    }
 }

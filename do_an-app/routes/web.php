@@ -4,16 +4,7 @@ use App\Http\Middleware\EnsureAdminRole;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\DB;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+
 
 Route::get('/', 'App\Http\Controllers\SanPhamController@index');
 // Route::get('/', 'App\Http\Controllers\SanPhamController@mau_ao_moi');
@@ -31,9 +22,17 @@ Route::get('/product', function () {
 Route::get('/product-nike', 'App\Http\Controllers\NIKEController@index');
 Route::get('/product-jordan', 'App\Http\Controllers\SP_JordanController@index');
 
-
-
 Route::get('/register', 'App\Http\Controllers\UserController@createNewAccount');
+
+Route::post('/register', [
+    "as" => "saveCreateNewAccount",
+    "uses" => "App\Http\Controllers\UserController@createNewAccount"
+]);
+Route::post('/dang-ky', [
+    "as" => "saveCreateNewAccount",
+    "uses" => "App\Http\Controllers\UserController@store"
+]);
+
 
 Route::get('/login', 'App\Http\Controllers\UserController@login');
 
@@ -72,9 +71,9 @@ Route::get('/product-type', "App\Http\Controllers\SanPhamController@product_type
 Route::get('/action', "App\Http\Controllers\SanPhamController@action")->name('action');
 
 /*ADMIN*/
-Route::get('/admin', 'App\Http\Controllers\AdminController@index')->middleware(EnsureAdminRole::class);
-Route::get('/admin', 'App\Http\Controllers\AdminController@du_lieu_dashboard');
+Route::get('/admin', 'App\Http\Controllers\AdminController@du_lieu_dashboard')->middleware(EnsureAdminRole::class);
 Route::get('/login-admin', 'App\Http\Controllers\AdminController@login_admin');
+Route::get('/logout-admin', 'App\Http\Controllers\AdminController@logout_admin');
 
 Route::post('/dang-nhap-admin', [
     "uses" => "App\Http\Controllers\UserController@login_admin"
