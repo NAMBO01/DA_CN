@@ -58,7 +58,7 @@ class UserController extends Controller
         $user_new->date_of_birth = $date_of_birth;
 
         DB::transaction(function () use ($username, $password, $email, $date_of_birth, $name) {
-            DB::table('sb_user')
+            DB::table('bs_thanh_vien')
                 ->insert(
                     [
                         "ten" => $name,
@@ -151,7 +151,7 @@ class UserController extends Controller
         $email = $request->input('email');
         $password = $request->input('password');
 
-        $user = DB::table('sb_user')
+        $user = DB::table('bs_thanh_vien')
             ->where('email', $email)
             ->where('mat_khau', md5($password))
             ->first();
@@ -183,7 +183,7 @@ class UserController extends Controller
         $password = $request->input('mat_khau');
 
      
-        $user = DB::table('sb_user')
+        $user = DB::table('bs_thanh_vien')
             ->where('tai_khoan', $username)
             ->where('mat_khau', md5($password))
             ->first();

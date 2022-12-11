@@ -15,9 +15,9 @@ class UserAdminController extends Controller
      */
     public function index()
     {
-        $ds_khach_hang = DB::table('sb_user')
-            ->select(DB::raw('sb_user.*,sb_user.id,sb_loai_user.ten_loai_user'))
-            ->join('sb_loai_user', 'sb_user.id_loai_user', '=', 'sb_loai_user.id')
+        $ds_khach_hang = DB::table('bs_thanh_vien')
+            ->select(DB::raw('bs_thanh_vien.*,bs_thanh_vien.id,bs_loai_thanh_vien.ten_loai_user'))
+            ->join('bs_loai_thanh_vien', 'bs_thanh_vien.id_loai_user', '=', 'bs_loai_thanh_vien.id')
             ->get();
         return view('page_admin.trang_ds_user')->with('ds_khach_hang', $ds_khach_hang);
     }
@@ -61,8 +61,8 @@ class UserAdminController extends Controller
      */
     public function edit($id)
     {
-        $ds_user = DB::table('sb_user')->where("ID", $id)->get();
-        $loai_tv = DB::table('sb_loai_user')->get();
+        $ds_user = DB::table('bs_thanh_vien')->where("ID", $id)->get();
+        $loai_tv = DB::table('bs_loai_thanh_vien')->get();
 
 
         return view('page_admin.trang_edit_user')
@@ -83,7 +83,7 @@ class UserAdminController extends Controller
         $email = $request->get('email');
         $dien_thoai = $request->get('dien_thoai');
 
-        $result = DB::table('sb_user')
+        $result = DB::table('bs_thanh_vien')
             ->where('ID', $id)
             ->update([
                 'mat_khau' => md5($mat_khau),
@@ -104,7 +104,7 @@ class UserAdminController extends Controller
     {
 
         try {
-            DB::table('sb_user')->where('ID', $id)->delete();
+            DB::table('bs_thanh_vien')->where('ID', $id)->delete();
             return redirect($_SERVER['HTTP_REFERER'])->withErrors('Xoá thành công ', 'NoticeDelete');
         } catch (Exception $e) {
             return redirect($_SERVER['HTTP_REFERER'])->withErrors('Bị lỗi trong quá trình xóa vui lòng thử lại: ' . $e, 'NoticeDelete');

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+
 class NIKEController extends Controller
 {
     /**
@@ -13,9 +14,9 @@ class NIKEController extends Controller
      */
     public function index()
     {
-        $list_san_pham = DB::table('sb_san_pham')->where('id_loai_sp', 1)->get();
+        $list_san_pham = DB::table('bs_san_pham')->where('id_loai_sp', 1)->get();
         return view('production_nike')
-        ->with('list_san_pham', $list_san_pham);
+            ->with('list_san_pham', $list_san_pham);
     }
 
     /**

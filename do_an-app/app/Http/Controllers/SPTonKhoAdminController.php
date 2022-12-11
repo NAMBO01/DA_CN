@@ -15,10 +15,10 @@ class SPTonKhoAdminController extends Controller
      */
     public function index()
     {
-        $ds_sp_ton_kho = DB::table('sb_san_pham')
-            ->select(DB::raw('sb_san_pham.*,sb_san_pham.id,ten_loai_sp,sb_ton_kho.size,sb_ton_kho.so_luong'))
-            ->join('sb_loai_san_pham', 'sb_san_pham.id_loai_sp', '=', 'sb_loai_san_pham.ID_loai_sp')
-            ->join('sb_ton_kho', 'sb_san_pham.id', '=', 'sb_ton_kho.id_sp')
+        $ds_sp_ton_kho = DB::table('bs_san_pham')
+            ->select(DB::raw('bs_san_pham.*,bs_san_pham.id,ten_loai_sp,bs_ton_kho.size,bs_ton_kho.so_luong'))
+            ->join('bs_loai_san_pham', 'bs_san_pham.id_loai_sp', '=', 'bs_loai_san_pham.ID_loai_sp')
+            ->join('bs_ton_kho', 'bs_san_pham.id', '=', 'bs_ton_kho.id_sp')
             ->get();
         // echo '<pre>', print_r($ds_san_pham), '</pre>';
         return view('page_admin.trang_sp_ton_kho')->with('ds_sp_ton_kho', $ds_sp_ton_kho);
@@ -88,7 +88,7 @@ class SPTonKhoAdminController extends Controller
     public function destroy($id)
     {
         try {
-            DB::table('sb_tin_tuc')->where('ID', $id)->delete();
+            DB::table('bs_tin_tuc')->where('ID', $id)->delete();
             return redirect($_SERVER['HTTP_REFERER'])->withErrors('Xoá thành công ', 'NoticeDelete');
         } catch (Exception $e) {
             return redirect($_SERVER['HTTP_REFERER'])->withErrors('Bị lỗi trong quá trình xóa vui lòng thử lại: ' . $e, 'NoticeDelete');

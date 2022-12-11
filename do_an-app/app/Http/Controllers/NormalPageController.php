@@ -139,7 +139,7 @@ class NormalPageController extends Controller
             }
 
             DB::transaction(function () use ($ho_ten, $email, $dien_thoai, $dia_chi, $trang_thai, $tong_tien, $ngay_dat, $gio_hang, $ma_don_hang) {
-                $id_don_hang = DB::table('sb_don_hang')
+                $id_don_hang = DB::table('bs_don_hang')
                     ->insertGetId(
                         [
                             "ho_ten_nguoi_nhan" => $ho_ten,
@@ -157,7 +157,7 @@ class NormalPageController extends Controller
                 usleep(10000);
 
                 foreach ($gio_hang as $sp) {
-                    DB::table('sb_ct_don_hang')
+                    DB::table('bs_st_don_hang')
                         ->insert(
                             [
                                 "id_don_hang" => $id_don_hang,

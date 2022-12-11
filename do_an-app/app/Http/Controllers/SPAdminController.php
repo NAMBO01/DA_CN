@@ -15,11 +15,11 @@ class SPAdminController extends Controller
      */
     public function index()
     {
-        $ds_san_pham = DB::table('sb_san_pham')
-            ->select(DB::raw('sb_san_pham.*,sb_san_pham.id,ten_nha_san_xuat,ten_loai_sp'))
-            ->join('sb_nha_san_xuat', 'sb_san_pham.id_nha_san_xuat', '=', 'sb_nha_san_xuat.id')
-            ->join('sb_loai_san_pham', 'sb_san_pham.id_loai_sp', '=', 'sb_loai_san_pham.ID_loai_sp')
-            // ->join('sb_hinh_san_pham', 'sb_san_pham.ID', '=', 'sb_hinh_san_pham.id_sp')
+        $ds_san_pham = DB::table('bs_san_pham')
+            ->select(DB::raw('bs_san_pham.*,bs_san_pham.id,ten_nha_san_xuat,ten_loai_sp'))
+            ->join('bs_nha_san_xuat', 'bs_san_pham.id_nha_san_xuat', '=', 'bs_nha_san_xuat.id')
+            ->join('bs_loai_san_pham', 'bs_san_pham.id_loai_sp', '=', 'bs_loai_san_pham.ID_loai_sp')
+            // ->join('sb_hinh_san_pham', 'bs_san_pham.ID', '=', 'sb_hinh_san_pham.id_sp')
             ->get();
         // echo '<pre>', print_r($ds_san_pham), '</pre>';
         return view('page_admin.trang_ds_san_pham')->with('ds_san_pham', $ds_san_pham);
@@ -67,7 +67,7 @@ class SPAdminController extends Controller
             $hinh_sp->move($public_path . '/images/hinh_sp', $hinh);
         }
 
-        $id_san_pham_moi = DB::table('sb_san_pham')
+        $id_san_pham_moi = DB::table('bs_san_pham')
             ->insertGetId([
                 'id_loai_sp' => $id_loai_sp,
                 'ten_san_pham' => $ten_san_pham,
@@ -103,11 +103,11 @@ class SPAdminController extends Controller
      */
     public function edit($id)
     {
-        $ds_nsx = DB::table('sb_nha_san_xuat')->get();
+        $ds_nsx = DB::table('bs_nha_san_xuat')->get();
 
-        $thong_tin_san_pham = DB::table('sb_san_pham')->where('ID', $id)->first();
-        $info_product = DB::table('sb_san_pham')->where('ID', $id)->get();
-        $list_loai_sp = DB::table('sb_loai_san_pham')->get();
+        $thong_tin_san_pham = DB::table('bs_san_pham')->where('ID', $id)->first();
+        $info_product = DB::table('bs_san_pham')->where('ID', $id)->get();
+        $list_loai_sp = DB::table('bs_loai_san_pham')->get();
 
         return view('page_admin.trang_edit_san_pham')
             ->with('ds_nsx', $ds_nsx)
@@ -150,7 +150,7 @@ class SPAdminController extends Controller
             }
         }
 
-        $result = DB::table('sb_san_pham')
+        $result = DB::table('bs_san_pham')
             ->where('ID', $id)
             ->update([
                 'id_loai_sp' => $id_loai_san_pham,
@@ -176,7 +176,7 @@ class SPAdminController extends Controller
     {
 
         try {
-            DB::table('sb_san_pham')->where('ID', $id)->delete();
+            DB::table('bs_san_pham')->where('ID', $id)->delete();
             return redirect($_SERVER['HTTP_REFERER'])->withErrors('Xoá thành công ', 'NoticeDelete');
         } catch (Exception $e) {
             return redirect($_SERVER['HTTP_REFERER'])->withErrors('Bị lỗi trong quá trình xóa vui lòng thử lại: ' . $e, 'NoticeDelete');
@@ -185,9 +185,9 @@ class SPAdminController extends Controller
 
     function create_sp()
     {
-        $ds_nsx = DB::table('sb_nha_san_xuat')->get();
+        $ds_nsx = DB::table('bs_nha_san_xuat')->get();
 
-        $list_loai_sp = DB::table('sb_loai_san_pham')->get();
+        $list_loai_sp = DB::table('bs_loai_san_pham')->get();
         return view('page_admin.trang_them_sp')->with('list_loai_sp', $list_loai_sp)->with('ds_nsx', $ds_nsx);
     }
 }

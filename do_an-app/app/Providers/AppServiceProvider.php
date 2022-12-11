@@ -27,7 +27,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $list_loai_sp = DB::table('sb_loai_san_pham')
+        $list_loai_sp = DB::table('bs_loai_san_pham')
         ->where('id_loai_cha', 0)
         ->get();
 
@@ -35,7 +35,7 @@ class AppServiceProvider extends ServiceProvider
 
         foreach($list_loai_sp as $key => $loai_sp_cha){
             // echo $loai_sp_cha->ID_loai_sp. " ";
-            $list_ds_loai_con = DB::table('sb_loai_san_pham')
+            $list_ds_loai_con = DB::table('bs_loai_san_pham')
             ->where('id_loai_cha', $loai_sp_cha->ID_loai_sp)
             ->get();
 

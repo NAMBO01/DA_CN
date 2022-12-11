@@ -101,11 +101,11 @@ class AdminController extends Controller
     function du_lieu_dashboard()
     {
 
-        $khach_hang = DB::table('sb_user')
+        $khach_hang = DB::table('bs_thanh_vien')
             ->select(DB::raw('COUNT(*) as so_luong_khach_hang'))
             ->where('id_loai_user', '<', '5')
             ->get();
-        $tong_so_luong = DB::table('sb_don_hang')
+        $tong_so_luong = DB::table('bs_don_hang')
             ->select(DB::raw('COUNT(*) as tong_so_luong'))
 
             ->get();

@@ -19,14 +19,11 @@ class SanPhamController extends Controller
      */
     public function index()
     {
-        //
-        // $list_sp_noi_bat = DB::select('SELECT s.*, ten_tac_gia
-        // $list_sp_noi_bat = DB::table('sb_san_pham')->where('noi_bat', 1)->limit(3)->get();
-        // $list_mau_ao_moi = DB::table('sb_san_pham')->where('trang_thai', 1)->limit(2)->get();
-        $list_sp_noi_bat = DB::table('sb_san_pham')->where('noi_bat', 1)->get();
-        $list_mau_ao_moi = DB::table('sb_san_pham')->where('ID_loai_sp', 27)->get();
-        $list_mau_giay_moi = DB::table('sb_san_pham')->where('ID_loai_sp', 24)->get();
-        $products = DB::table('sb_san_pham')->get();
+       
+        $list_sp_noi_bat = DB::table('bs_san_pham')->where('noi_bat', 1)->get();
+        $list_mau_ao_moi = DB::table('bs_san_pham')->where('ID_loai_sp', 27)->get();
+        $list_mau_giay_moi = DB::table('bs_san_pham')->where('ID_loai_sp', 24)->get();
+        $products = DB::table('bs_san_pham')->get();
 
 
         $user_info = Session::get('user_info');
@@ -125,14 +122,14 @@ class SanPhamController extends Controller
             }
 
             if ($flag == 0) {
-                $thong_tin_sp = DB::table('sb_san_pham')->where('ID', $id_sp)->first();
+                $thong_tin_sp = DB::table('bs_san_pham')->where('ID', $id_sp)->first();
                 $thong_tin_sp = json_decode(json_encode($thong_tin_sp));
                 $thong_tin_sp->so_luong = 1;
                 $gio_hang[] = $thong_tin_sp;
             }
         } else {
             $gio_hang = [];
-            $thong_tin_sp = DB::table('sb_san_pham')->where('ID', $id_sp)->first();
+            $thong_tin_sp = DB::table('bs_san_pham')->where('ID', $id_sp)->first();
             $thong_tin_sp = json_decode(json_encode($thong_tin_sp));
             $thong_tin_sp->so_luong = 1;
             $gio_hang[] = $thong_tin_sp;
@@ -227,9 +224,9 @@ class SanPhamController extends Controller
     function san_pham_moi(Request $request)
     {
         $id_sp = $request->get('id_sp');
-        $sp_single = DB::table('sb_san_pham')->where('ID', $id_sp)->get();
+        $sp_single = DB::table('bs_san_pham')->where('ID', $id_sp)->get();
         $img_more = DB::table('sb_hinh_san_pham')->where('id_sp', $id_sp)->get();
-        $list_mau_ao_moi = DB::table('sb_san_pham')->where('ID_loai_sp', 27)->get();
+        $list_mau_ao_moi = DB::table('bs_san_pham')->where('ID_loai_sp', 27)->get();
 
         return view('single')
             ->with('list_mau_ao_moi', $list_mau_ao_moi)
@@ -241,15 +238,15 @@ class SanPhamController extends Controller
     {
         $id_loai_sp = $request->get('id_loai_sp');
         if ($id_loai_sp == "*") {
-            $list_sp = DB::table('sb_san_pham')->get();
+            $list_sp = DB::table('bs_san_pham')->get();
         } else if ($id_loai_sp == "ao") {
-            $list_sp = DB::table('sb_san_pham')->where('ID_loai_sp', 27)->get();
+            $list_sp = DB::table('bs_san_pham')->where('ID_loai_sp', 27)->get();
         } else if ($id_loai_sp == "giay") {
-            $list_sp = DB::table('sb_san_pham')->where('ID_loai_sp', 24)->get();
+            $list_sp = DB::table('bs_san_pham')->where('ID_loai_sp', 24)->get();
         } else {
-            $list_sp = DB::table('sb_san_pham')->where('id_loai_sp', $id_loai_sp)->get();
+            $list_sp = DB::table('bs_san_pham')->where('id_loai_sp', $id_loai_sp)->get();
         }
-        $name_loai_sp = DB::table('sb_loai_san_pham')->where('id_loai_sp', $id_loai_sp)->get();
+        $name_loai_sp = DB::table('bs_loai_san_pham')->where('id_loai_sp', $id_loai_sp)->get();
 
 
         //  echo '<pre>',print_r($list_sp) ,'</pre>';
@@ -266,7 +263,7 @@ class SanPhamController extends Controller
             $output = '';
             $query = $request->get('query');
             if ($query != '') {
-                $data = DB::table('sb_san_pham')
+                $data = DB::table('bs_san_pham')
                     ->where('ten_san_pham', 'like', '%' . $query . '%')
                     ->get();
             } else {
