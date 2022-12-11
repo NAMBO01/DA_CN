@@ -8,3 +8,4 @@ doi ten database thanh laravel_2
 sau đó chạy lệnh: composer i trong terminal
 tiếp theo là lệnh: composer require laravelcollective/html
 php artisan serve
+s
