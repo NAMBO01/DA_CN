@@ -51,6 +51,10 @@
 
                     <a href="/gio-hang"><span></span>GIỎ HÀNG</a>
                 </div>
+                <div>
+                    <a href="/don-hang"> <i class="fa fa-list" style="color: #FF6A6A; " aria-hidden="true"></i>
+                        </i>ĐƠN HÀNG</a>
+                </div>
                 <div class="clearfix"> </div>
             </div>
             <div class="clearfix"> </div>

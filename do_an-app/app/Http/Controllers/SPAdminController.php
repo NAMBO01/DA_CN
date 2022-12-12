@@ -19,7 +19,6 @@ class SPAdminController extends Controller
             ->select(DB::raw('bs_san_pham.*,bs_san_pham.id,ten_nha_san_xuat,ten_loai_sp'))
             ->join('bs_nha_san_xuat', 'bs_san_pham.id_nha_san_xuat', '=', 'bs_nha_san_xuat.id')
             ->join('bs_loai_san_pham', 'bs_san_pham.id_loai_sp', '=', 'bs_loai_san_pham.ID_loai_sp')
-            // ->join('sb_hinh_san_pham', 'bs_san_pham.ID', '=', 'sb_hinh_san_pham.id_sp')
             ->get();
         // echo '<pre>', print_r($ds_san_pham), '</pre>';
         return view('page_admin.trang_ds_san_pham')->with('ds_san_pham', $ds_san_pham);

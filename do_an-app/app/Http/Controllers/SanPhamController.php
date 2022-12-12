@@ -19,7 +19,7 @@ class SanPhamController extends Controller
      */
     public function index()
     {
-       
+
         $list_sp_noi_bat = DB::table('bs_san_pham')->where('noi_bat', 1)->get();
         $list_mau_ao_moi = DB::table('bs_san_pham')->where('ID_loai_sp', 27)->get();
         $list_mau_giay_moi = DB::table('bs_san_pham')->where('ID_loai_sp', 24)->get();
@@ -225,7 +225,7 @@ class SanPhamController extends Controller
     {
         $id_sp = $request->get('id_sp');
         $sp_single = DB::table('bs_san_pham')->where('ID', $id_sp)->get();
-        $img_more = DB::table('sb_hinh_san_pham')->where('id_sp', $id_sp)->get();
+        $img_more = DB::table('bs_hinh_san_pham')->where('id_sp', $id_sp)->get();
         $list_mau_ao_moi = DB::table('bs_san_pham')->where('ID_loai_sp', 27)->get();
 
         return view('single')
