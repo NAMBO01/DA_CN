@@ -192,10 +192,10 @@ class DHangAdminController extends Controller
         $chi_tiet_don_hang_2 = DB::table('bs_don_hang')
             ->where('ID', $id)->get();
 
-        $tt_don_hang = DB::table('sb_ct_don_hang')
-            ->select(DB::raw('hinh,sb_ct_don_hang.ID,sb_san_pham.ID,ten_san_pham,sb_san_pham.don_gia,gia_giam, so_luong,thanh_tien,tong_tien'))
-            ->join('sb_san_pham', 'sb_san_pham.ID', '=', 'sb_ct_don_hang.id_sp')
-            ->join('bs_don_hang', 'bs_don_hang.ID', '=', 'sb_ct_don_hang.ID_don_hang')
+        $tt_don_hang = DB::table('bs_ct_don_hang')
+            ->select(DB::raw('hinh,bs_ct_don_hang.ID,bs_san_pham.ID,ten_san_pham,bs_san_pham.don_gia,gia_giam, so_luong,thanh_tien,tong_tien'))
+            ->join('bs_san_pham', 'bs_san_pham.ID', '=', 'bs_ct_don_hang.id_sp')
+            ->join('bs_don_hang', 'bs_don_hang.ID', '=', 'bs_ct_don_hang.ID_don_hang')
             ->where('ID_don_hang', $id)
             ->get();
 
@@ -204,5 +204,4 @@ class DHangAdminController extends Controller
             ->with('chi_tiet_don_hang_2', $chi_tiet_don_hang_2)
             ->with('tt_don_hang', $tt_don_hang);
     }
-    
 }

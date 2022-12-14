@@ -59,6 +59,11 @@ Route::get('/gio-hang', "App\Http\Controllers\NormalPageController@gio_hang");
 
 Route::get('/thanh-toan', "App\Http\Controllers\NormalPageController@thanh_toan");
 
+Route::get('/don-hang', "App\Http\Controllers\DonHangController@index");
+
+Route::get('/chi-tiet/{id_dh}', "App\Http\Controllers\DonHangController@chi_tiet_don_hang");
+Route::get('/back', "App\Http\Controllers\DonHangController@index");
+
 Route::post('/thanh-toan', [
     "as" => "save_thanh_toan",
     "uses" => "App\Http\Controllers\NormalPageController@thanh_toan_store"

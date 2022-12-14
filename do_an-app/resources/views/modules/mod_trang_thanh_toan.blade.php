@@ -7,39 +7,43 @@
             <div class="form-group">
                 <legend>Thông tin người mua hàng</legend>
             </div>
-            @if(session()->has('user_info'))
-            <div class="form-group">
-                <div class="col-md-3">
-                    Họ tên:
+            @if (session()->has('user_info'))
+                <div class="form-group">
+                    <div class="col-md-3">
+                        Họ tên:
+                    </div>
+                    <div class="col-md-9">
+                        <input type="text" name="ho_ten" id="ho_ten" class="form-control"
+                            value="{{ $user_info->ten }}" title="">
+                    </div>
                 </div>
-                <div class="col-md-9">
-                    <input type="text" name="ho_ten" id="ho_ten" class="form-control" value="{{$user_info->ten}}" title="">
+                <div class="form-group">
+                    <div class="col-md-3">
+                        Email:
+                    </div>
+                    <div class="col-md-9">
+                        <input type="text" name="email" id="email" class="form-control"
+                            value="{{ $user_info->email }}" required="required" title="">
+                    </div>
                 </div>
-            </div>
-            <div class="form-group">
-                <div class="col-md-3">
-                    Email:
+                <div class="form-group">
+                    <div class="col-md-3">
+                        Điện thoại:
+                    </div>
+                    <div class="col-md-9">
+                        <input type="text" name="dien_thoai" id="dien_thoai" class="form-control"
+                            value="{{ $user_info->dien_thoai }}" required="required" title="">
+                    </div>
                 </div>
-                <div class="col-md-9">
-                    <input type="text" name="email" id="email" class="form-control" value="{{$user_info->email}}" required="required" title="">
+                <div class="form-group">
+                    <div class="col-md-3">
+                        Địa chỉ:
+                    </div>
+                    <div class="col-md-9">
+                        <input type="text" name="dia_chi" id="dia_chi" class="form-control" value=""
+                            required="required" title="">
+                    </div>
                 </div>
-            </div>
-            <div class="form-group">
-                <div class="col-md-3">
-                    Điện thoại:
-                </div>
-                <div class="col-md-9">
-                    <input type="text" name="dien_thoai" id="dien_thoai" class="form-control" value="{{$user_info->dien_thoai}}" required="required" title="">
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-md-3">
-                    Địa chỉ:
-                </div>
-                <div class="col-md-9">
-                    <input type="text" name="dia_chi" id="dia_chi" class="form-control" value="" required="required" title="">
-                </div>
-            </div>
             @endif
             <div class="form-group">
                 <div class="col-md-9 col-sm-offset-3">

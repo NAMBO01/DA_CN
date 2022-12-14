@@ -21,7 +21,7 @@
         <div class="container">
             <div class="header-bottom-left">
                 <div class="logo">
-                    <a href="/index"><img src="images/logo.png" alt=" " /></a>
+                    <a href="/index"><img src="/images/logo.png" alt=" " /></a>
                 </div>
                 <div class="search">
                     <input type="text" name="search" id="search" value="" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '';}">
@@ -34,7 +34,7 @@
             <div class="header-bottom-right">
                 <ul class="login">
                     @if (isset($user_info))
-                    <li><a href=#></a>{{ $user_info->ten }}</li> | <br>
+                    <li><a href=/don-hang>{{ $user_info->ten }}</a></li> | <br>
                     <li><a href='/logout'>ĐĂNG XUẤT</a></li>
                     @else
                     <li><a href='/login'><span> </span>ĐĂNG NHẬP</a></li> |
@@ -51,10 +51,7 @@
 
                     <a href="/gio-hang"><span></span>GIỎ HÀNG</a>
                 </div>
-                <div>
-                    <a href="/don-hang"> <i class="fa fa-list" style="color: #FF6A6A; " aria-hidden="true"></i>
-                        </i>ĐƠN HÀNG</a>
-                </div>
+               
                 <div class="clearfix"> </div>
             </div>
             <div class="clearfix"> </div>

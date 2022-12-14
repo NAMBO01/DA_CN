@@ -223,6 +223,8 @@ class SanPhamController extends Controller
     }
     function san_pham_moi(Request $request)
     {
+        $user_info = Session::get('user_info');
+
         $id_sp = $request->get('id_sp');
         $sp_single = DB::table('bs_san_pham')->where('ID', $id_sp)->get();
         $img_more = DB::table('bs_hinh_san_pham')->where('id_sp', $id_sp)->get();
@@ -231,11 +233,14 @@ class SanPhamController extends Controller
         return view('single')
             ->with('list_mau_ao_moi', $list_mau_ao_moi)
             ->with('sp_single', $sp_single)
-            ->with('img_more', $img_more);
+            ->with('img_more', $img_more)
+            ->with('user_info', $user_info);
     }
 
     function product_type(Request $request)
     {
+        $user_info = Session::get('user_info');
+
         $id_loai_sp = $request->get('id_loai_sp');
         if ($id_loai_sp == "*") {
             $list_sp = DB::table('bs_san_pham')->get();
@@ -253,6 +258,7 @@ class SanPhamController extends Controller
 
         return view('product')
             ->with('name_loai_sp', $name_loai_sp)
+            ->with('user_info', $user_info)
             ->with('list_sp', $list_sp)
             ->with('id_loai_sp', $id_loai_sp);
     }

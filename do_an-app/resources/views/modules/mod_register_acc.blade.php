@@ -15,12 +15,12 @@
         <div class="register-top-grid">
             <h3>THÔNG TIN ĐĂNG KÝ</h3>
             @if ($errors->first())
-            <div class="error_message panel panel-danger">
-                <div class="panel-heading">Vui lòng kiểm tra lỗi</div>
-                @foreach ($errors->all() as $message_error)
-                <div class="panel-body item_message text-danger">{{ $message_error }}</div>
-                @endforeach
-            </div>
+                <div class="error_message panel panel-danger">
+                    <div class="panel-heading">Vui lòng kiểm tra lỗi</div>
+                    @foreach ($errors->all() as $message_error)
+                        <div class="panel-body item_message text-danger">{{ $message_error }}</div>
+                    @endforeach
+                </div>
             @endif
 
             <div class="mation">
