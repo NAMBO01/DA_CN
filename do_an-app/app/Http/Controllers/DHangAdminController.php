@@ -127,12 +127,7 @@ class DHangAdminController extends Controller
 
         $trang_thai = $request->get('trang_thai');
 
-        // $ma_don_hang = $request->get('ma_don_hang');
-        // $ho_ten_nguoi_dat = $request->get('ten');
-        // $email_nguoi_nhan = $request->get('email_nguoi_nhan');
-        // $sdt_nguoi_nhan = $request->get('sdt_nguoi_nhan');
-        // $dia_chi_nguoi_nhan = $request->get('dia_chi_nguoi_nhan');
-        // $tong_tien = $request->get('tong_tien');
+
         DB::transaction(function () use ($array_trang_thai, $trang_thai, $thong_tin_don_hang_old, $id) {
 
             DB::table('bs_don_hang')

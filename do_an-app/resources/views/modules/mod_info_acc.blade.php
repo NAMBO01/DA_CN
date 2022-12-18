@@ -8,8 +8,9 @@
                 <li><a href="/memberclass">Hạng thành viên</a></li>
                 <li><a href="/account">Tài khoản của bạn</a></li>
                 <li><a href="/contact">Liên hệ</a></li>
+                @if (isset($user_info))
                 <li><a href="/logout">Đăng xuất</a></li>
-
+                @endif
             </ul>
         </ul>
     </div>

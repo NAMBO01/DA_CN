@@ -2,11 +2,13 @@
     <div class=" top-nav rsidebar span_1_of_left">
         <h3 class="cate">DANH MỤC </h3>
         <ul class="menu">
-            @for ($i = 0; $i < count($ds_loai_sp); $i++) <li @if (count($ds_loai_sp[$i]->ds_loai_con) > 0) class="item1" @endif><a href="#">{{ $ds_loai_sp[$i]->ten_loai_sp }}<img class="arrow-img" src="images/arrow1.png" alt="" /></a>
+            @for ($i = 0; $i < count($ds_loai_sp); $i++) <li @if (count($ds_loai_sp[$i]->ds_loai_con) > 0) class="item1" @endif>
+                <a href="#">{{ $ds_loai_sp[$i]->ten_loai_sp }}<img class="arrow-img" src="images/arrow1.png" alt="" /></a>
                 @if (count($ds_loai_sp[$i]->ds_loai_con) > 0)
                 <ul class="cute">
                     @for ($j = 0; $j < count($ds_loai_sp[$i]->ds_loai_con); $j++)
-                        <li class="subitem1"><a href="/product-type?id_loai_sp={{ $ds_loai_sp[$i]->ds_loai_con[$j]->ID_loai_sp }}">{{ $ds_loai_sp[$i]->ds_loai_con[$j]->ten_loai_sp }}</a>
+                        <li class="subitem1">
+                            <a href="/product-type?id_loai_sp={{ $ds_loai_sp[$i]->ds_loai_con[$j]->ID_loai_sp }}">{{ $ds_loai_sp[$i]->ds_loai_con[$j]->ten_loai_sp }}</a>
                         </li>
                         @endfor
                 </ul>

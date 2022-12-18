@@ -20,7 +20,7 @@
                         <div class="status">{{$dh->ten_trang_thai}}</div>
                     </div>
                     <div class="order-item__price">
-                        <div class="price">{{$dh->tong_tien}}</div>
+                        <div class="price">@VND_monney($dh->tong_tien) VNĐ</div>
                     </div>
                     <div class="order-item__btn-view">
                         <a href="/chi-tiet/id_dh={{$dh->ID}}"> Xem chi tiết

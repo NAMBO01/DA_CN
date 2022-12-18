@@ -93,6 +93,7 @@ ul.support li a {
     display: inline-block;
     vertical-align: middle;
 }
+
 .account a,
 .cart a,
 ul.login li a {
@@ -943,7 +944,7 @@ a.forgot {
 .register-bottom-grid input[type="text"] {
     border: 1px solid #eee;
     outline-color: #ff5b36;
-    width: 70%;
+    width: 100%;
     font-size: 1em;
     padding: 0.5em;
     margin: 0.5em 0;
@@ -1896,4 +1897,11 @@ select.in-drop {
 .icon-pn {
     margin: 25px 0;
     font-size: 30px;
+}
+.fa-solid {
+    color: #f97e76;
+}
+
+#search_product a {
+    margin-left: 10px;
 }

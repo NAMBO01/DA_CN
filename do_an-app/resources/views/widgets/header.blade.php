@@ -31,11 +31,11 @@
                 </div>
                 <div class="clearfix"> </div>
             </div>
-            <div class="header-bottom-right">
+            <div class="header-bottom-right ">
                 <ul class="login">
                     @if (isset($user_info))
-                    <li><a href=/don-hang>{{ $user_info->ten }}</a></li> | <br>
-                    <li><a href='/logout'>ĐĂNG XUẤT</a></li>
+                    <li><i class="fa-solid fa-user"></i> <a href=/don-hang>{{ $user_info->ten }}</a></li> | <br>
+                    <!-- <li><a href='/logout'>ĐĂNG XUẤT</a></li> -->
                     @else
                     <li><a href='/login'><span> </span>ĐĂNG NHẬP</a></li> |
                     <li><a href='/register'>ĐĂNG KÝ</a></li>
@@ -51,7 +51,7 @@
 
                     <a href="/gio-hang"><span></span>GIỎ HÀNG</a>
                 </div>
-               
+
                 <div class="clearfix"> </div>
             </div>
             <div class="clearfix"> </div>

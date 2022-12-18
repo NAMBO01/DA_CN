@@ -61,18 +61,14 @@ class DonHangController extends Controller
             ->join('loai_trang_thai', 'loai_trang_thai.id', '=', 'bs_trang_thai.trang_thai_moi')
             ->where('id_nguoi_dung', $user_info->ID)
             ->where('bs_don_hang.ID', $id_dh)
-            ->distinct()
             ->get();
 
         return view('chi_tiet_don_hang')
             ->with('user_info', $user_info)
             ->with('ct_don_hang', $ct_don_hang);
     }
-    function back(){
-        return view('lich_su_dh');
-            
-    }
 
+  
     /**
      * Display the specified resource.
      *
