@@ -100,7 +100,11 @@ class AdminController extends Controller
     }
     function du_lieu_dashboard()
     {
-
+        $doanh_thu = DB::table('bs_don_hang')
+            ->select(DB::raw('SUM(tong_tien) as tong_doanh_thu'))
+            ->join('bs_thanh_vien', 'bs_thanh_vien.ID', '=', 'bs_don_hang.id_nguoi_dung')
+            ->where('id_loai_user', '<', '5')
+            ->get();
         $khach_hang = DB::table('bs_thanh_vien')
             ->select(DB::raw('COUNT(*) as so_luong_khach_hang'))
             ->where('id_loai_user', '<', '5')
@@ -111,6 +115,7 @@ class AdminController extends Controller
             ->get();
         return view('page_admin.trang_dashboard')
             ->with('tong_so_luong', $tong_so_luong)
+            ->with('doanh_thu', $doanh_thu)
             ->with('khach_hang', $khach_hang);
     }
     function logout_admin(Request $request)

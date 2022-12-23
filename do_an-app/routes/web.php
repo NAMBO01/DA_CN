@@ -96,6 +96,10 @@ Route::get('/admin/ql-khach-hang/edit/{id_user}', 'App\Http\Controllers\UserAdmi
 Route::post('/admin/ql-khach-hang/edit/{id_user}', 'App\Http\Controllers\UserAdminController@update')->middleware(EnsureAdminRole::class);
 Route::get('/admin/ql-khach-hang/delete/{id_user}', 'App\Http\Controllers\UserAdminController@destroy')->middleware(EnsureAdminRole::class);
 
+Route::get('/admin/ql-nhan-vien', 'App\Http\Controllers\UserAdminController@nhan_vien')->middleware(EnsureAdminRole::class);
+Route::get('/admin/ql-nhan-vien/edit/{id_nv}', 'App\Http\Controllers\UserAdminController@edit_nhan_vien')->middleware(EnsureAdminRole::class);
+Route::post('/admin/ql-nhan-vien/edit/{id_nv}', 'App\Http\Controllers\UserAdminController@update_nhan_vien')->middleware(EnsureAdminRole::class);
+Route::get('/admin/ql-nhan-vien/delete/{id_nv}', 'App\Http\Controllers\UserAdminController@destroy_nhan_vien')->middleware(EnsureAdminRole::class);
 
 Route::get('/admin/ql-don-hang', 'App\Http\Controllers\DHangAdminController@index')->middleware(EnsureAdminRole::class);
 Route::get('/admin/ql-don-hang/pagination/{current_page}', 'App\Http\Controllers\DHangAdminController@pagination');

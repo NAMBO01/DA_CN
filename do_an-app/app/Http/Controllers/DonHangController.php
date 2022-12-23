@@ -56,10 +56,8 @@ class DonHangController extends Controller
         $ct_don_hang = DB::table('bs_don_hang')
             ->select(DB::raw('ma_don_hang,ten_trang_thai,trang_thai_moi,tong_tien'))
             ->join('bs_ct_don_hang', 'bs_ct_don_hang.ID_don_hang', 'bs_don_hang.ID')
-            ->join('bs_thanh_vien', 'bs_thanh_vien.ID', '=', 'bs_don_hang.id_nguoi_dung')
             ->join('bs_trang_thai', 'bs_trang_thai.id_don_hang', '=', 'bs_don_hang.ID')
             ->join('loai_trang_thai', 'loai_trang_thai.id', '=', 'bs_trang_thai.trang_thai_moi')
-            ->where('id_nguoi_dung', $user_info->ID)
             ->where('bs_don_hang.ID', $id_dh)
             ->get();
 
@@ -68,7 +66,7 @@ class DonHangController extends Controller
             ->with('ct_don_hang', $ct_don_hang);
     }
 
-  
+
     /**
      * Display the specified resource.
      *

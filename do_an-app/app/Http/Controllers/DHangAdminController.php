@@ -24,8 +24,10 @@ class DHangAdminController extends Controller
         $ds_don_hang = DB::table('bs_don_hang')
             ->select(DB::raw('bs_don_hang.*,bs_don_hang.ma_don_hang, ten_trang_thai'))
             ->join('bs_trang_thai', 'bs_don_hang.ID', '=', 'bs_trang_thai.id_don_hang')
+            ->join('bs_thanh_vien', 'bs_thanh_vien.ID', '=', 'bs_don_hang.id_nguoi_dung')
             ->join('loai_trang_thai', 'loai_trang_thai.id', '=', 'bs_trang_thai.trang_thai_moi')
-            ->orderBy('ID', 'ASC')->skip($index_lay_don_hang)->limit(10)->get();
+            ->orderBy('ID', 'ASC')->skip($index_lay_don_hang)->where('id_loai_user', '<', '5')
+            ->limit(10)->get();
         $tong_so_luong = DB::table('bs_don_hang')
             ->select(DB::raw('COUNT(*) as tong_so_luong'))->first();
 
@@ -42,8 +44,10 @@ class DHangAdminController extends Controller
         $ds_don_hang = DB::table('bs_don_hang')
             ->select(DB::raw('bs_don_hang.*,bs_don_hang.ma_don_hang, ten_trang_thai'))
             ->join('bs_trang_thai', 'bs_don_hang.ID', '=', 'bs_trang_thai.id_don_hang')
+            ->join('bs_thanh_vien', 'bs_thanh_vien.ID', '=', 'bs_don_hang.id_nguoi_dung')
             ->join('loai_trang_thai', 'loai_trang_thai.id', '=', 'bs_trang_thai.trang_thai_moi')
-            ->orderBy('ID', 'ASC')->skip($index_lay_don_hang)->limit(10)->get();
+            ->orderBy('ID', 'ASC')->skip($index_lay_don_hang)->where('id_loai_user', '<', '5')
+            ->limit(10)->get();
         $tong_so_luong = DB::table('bs_don_hang')
             ->select(DB::raw('COUNT(*) as tong_so_luong'))->first();
 

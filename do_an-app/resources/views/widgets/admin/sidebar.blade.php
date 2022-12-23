@@ -38,7 +38,11 @@
                 </a>
                 <ul class="sub">
                     <li><a class="" href="/admin/ql-khach-hang">Danh sách Khách hàng</a></li>
+                    <li><a class="" href="/admin/ql-nhan-vien">Danh sách Nhân Viên</a></li>
+
                 </ul>
+
+
             </li>
         </ul>
         <!-- sidebar menu end-->

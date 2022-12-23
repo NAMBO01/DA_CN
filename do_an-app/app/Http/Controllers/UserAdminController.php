@@ -18,10 +18,19 @@ class UserAdminController extends Controller
         $ds_khach_hang = DB::table('bs_thanh_vien')
             ->select(DB::raw('bs_thanh_vien.*,bs_thanh_vien.id,bs_loai_thanh_vien.ten_loai_user'))
             ->join('bs_loai_thanh_vien', 'bs_thanh_vien.id_loai_user', '=', 'bs_loai_thanh_vien.id')
+            ->where('id_loai_user', '<', 5)
             ->get();
         return view('page_admin.trang_ds_user')->with('ds_khach_hang', $ds_khach_hang);
     }
-
+    function nhan_vien()
+    {
+        $ds_nhan_vien = DB::table('bs_thanh_vien')
+            ->select(DB::raw('bs_thanh_vien.*,bs_thanh_vien.id,bs_loai_thanh_vien.ten_loai_user'))
+            ->join('bs_loai_thanh_vien', 'bs_thanh_vien.id_loai_user', '=', 'bs_loai_thanh_vien.id')
+            ->where('id_loai_user', '>', 5)
+            ->get();
+        return view('page_admin.trang_ds_nhan_vien')->with('ds_nhan_vien', $ds_nhan_vien);
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -69,6 +78,16 @@ class UserAdminController extends Controller
             ->with('ds_user', $ds_user)
             ->with('loai_tv', $loai_tv);
     }
+    public function edit_nhan_vien($id)
+    {
+        $ds_nhan_vien = DB::table('bs_thanh_vien')->where("ID", $id)->get();
+        $loai_tv = DB::table('bs_loai_thanh_vien')->get();
+
+
+        return view('page_admin.trang_edit_nhan_vien')
+            ->with('ds_nhan_vien', $ds_nhan_vien)
+            ->with('loai_tv', $loai_tv);
+    }
 
     /**
      * Update the specified resource in storage.
@@ -94,6 +113,23 @@ class UserAdminController extends Controller
         return redirect('/admin/ql-khach-hang')->with('NoticeSuccess', 'Cập nhật thông tin thành công');
     }
 
+    public function update_nhan_vien(Request $request, $id)
+    {
+        $mat_khau = $request->get('mat_khau');
+        $email = $request->get('email');
+        $dien_thoai = $request->get('dien_thoai');
+
+        $result = DB::table('bs_thanh_vien')
+            ->where('ID', $id)
+            ->update([
+                'mat_khau' => md5($mat_khau),
+                'email' => $email,
+                'dien_thoai' => $dien_thoai,
+            ]);
+
+        return redirect('/admin/ql-nhan-vien')->with('NoticeSuccess', 'Cập nhật thông tin thành công');
+    }
+
     /**
      * Remove the specified resource from storage.
      *
@@ -101,6 +137,16 @@ class UserAdminController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy(Request $request, $id)
+    {
+
+        try {
+            DB::table('bs_thanh_vien')->where('ID', $id)->delete();
+            return redirect($_SERVER['HTTP_REFERER'])->withErrors('Xoá thành công ', 'NoticeDelete');
+        } catch (Exception $e) {
+            return redirect($_SERVER['HTTP_REFERER'])->withErrors('Bị lỗi trong quá trình xóa vui lòng thử lại: ' . $e, 'NoticeDelete');
+        }
+    }
+    public function destroy_nhan_vien(Request $request, $id)
     {
 
         try {
