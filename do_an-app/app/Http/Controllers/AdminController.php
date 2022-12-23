@@ -86,8 +86,8 @@ class AdminController extends Controller
     }
     public function login_admin()
     {
-        if (Session::has('user_info')) {
-            $user_info = Session::get('user_info');
+        if (Session::has('user_admin')) {
+            $user_info = Session::get('user_admin');
 
             if ($user_info->id_loai_user >= 5) {
                 return redirect('/admin');
@@ -120,7 +120,7 @@ class AdminController extends Controller
     }
     function logout_admin(Request $request)
     {
-        Session::forget('user_info');
+        Session::forget('user_admin');
 
         return redirect($request->server('HTTP_REFERER'), 302);
     }

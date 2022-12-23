@@ -17,9 +17,13 @@ class SPAdminController extends Controller
     {
         $ds_san_pham = DB::table('bs_san_pham')
             ->select(DB::raw('bs_san_pham.*,bs_san_pham.id,ten_nha_san_xuat,ten_loai_sp'))
+            // Join the bs_nha_san_xuat table on the id_nha_san_xuat column of the bs_san_pham table
             ->join('bs_nha_san_xuat', 'bs_san_pham.id_nha_san_xuat', '=', 'bs_nha_san_xuat.id')
+            // Join the bs_loai_san_pham table on the id_loai_sp column of the bs_san_pham table
             ->join('bs_loai_san_pham', 'bs_san_pham.id_loai_sp', '=', 'bs_loai_san_pham.ID_loai_sp')
+            // Remove any duplicate rows from the result set
             ->distinct()
+            // Execute the query and retrieve the results
             ->get();
         // echo '<pre>', print_r($ds_san_pham), '</pre>';
         return view('page_admin.trang_ds_san_pham')->with('ds_san_pham', $ds_san_pham);

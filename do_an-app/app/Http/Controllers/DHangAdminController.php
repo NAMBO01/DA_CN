@@ -15,21 +15,42 @@ class DHangAdminController extends Controller
      */
     public function index()
     {
+        // Set the default value for the current page to 0
         $cur_page = 0;
+
+        // If the page parameter is present in the query string, update the value of $cur_page
         if (isset($_GET['page'])) {
             $cur_page = $_GET['page'];
         }
 
+        // Calculate the index for the first order to be displayed on the current page
         $index_lay_don_hang = $cur_page * 10;
+
+        // Select all columns from the bs_don_hang table, as well as the ten_trang_thai column from the bs_trang_thai table
         $ds_don_hang = DB::table('bs_don_hang')
             ->select(DB::raw('bs_don_hang.*,bs_don_hang.ma_don_hang, ten_trang_thai'))
+            // Join the bs_trang_thai table on the ID column of the bs_don_hang table
             ->join('bs_trang_thai', 'bs_don_hang.ID', '=', 'bs_trang_thai.id_don_hang')
+            // Join the bs_thanh_vien table on the id_nguoi_dung column of the bs_don_hang table
             ->join('bs_thanh_vien', 'bs_thanh_vien.ID', '=', 'bs_don_hang.id_nguoi_dung')
+            // Join the loai_trang_thai table on the id and trang_thai_moi columns
             ->join('loai_trang_thai', 'loai_trang_thai.id', '=', 'bs_trang_thai.trang_thai_moi')
-            ->orderBy('ID', 'ASC')->skip($index_lay_don_hang)->where('id_loai_user', '<', '5')
-            ->limit(10)->get();
+
+            // Sort the orders by their ID in ascending order
+            ->orderBy('ID', 'ASC')
+            // Skip the first $index_lay_don_hang orders
+            ->skip($index_lay_don_hang)
+            // Only include orders where the id_loai_user column is less than 5
+            ->where('id_loai_user', '<', '5')
+            // Limit the number of orders returned to 10
+            ->limit(10)
+            // Execute the query and retrieve the results
+            ->get();
+
+        // Retrieve the total number of orders in the database
         $tong_so_luong = DB::table('bs_don_hang')
             ->select(DB::raw('COUNT(*) as tong_so_luong'))->first();
+
 
         //echo '<pre>',print_r($tong_so_luong),'</pre>';
         $so_trang = ceil($tong_so_luong->tong_so_luong / 10);
@@ -132,32 +153,38 @@ class DHangAdminController extends Controller
         $trang_thai = $request->get('trang_thai');
 
 
+        // Start a database transaction
         DB::transaction(function () use ($array_trang_thai, $trang_thai, $thong_tin_don_hang_old, $id) {
 
+            // Update the trang_thai column in the bs_don_hang table for the row with the ID matching the value of the $id variable
             DB::table('bs_don_hang')
                 ->where('ID', $id)
                 ->update([
                     'trang_thai' => $trang_thai
                 ]);
 
+            // Check if there is a row in the bs_trang_thai table with an id_don_hang matching the ID of the order being updated
             $check_notice = DB::table('bs_trang_thai')
                 ->where('id_don_hang', $thong_tin_don_hang_old->ID)
                 ->first();
 
+            // If such a row exists, update the trang_thai_cu and trang_thai_moi columns to the values of the $check_notice->trang_thai_cu and $trang_thai variables, respectively
             if ($check_notice) {
+                // If $check_notice is truthy, update the bs_trang_thai table
                 DB::table('bs_trang_thai')
                     ->where('id_don_hang', $thong_tin_don_hang_old->ID)
                     ->update([
-                        'trang_thai_cu' => $check_notice->trang_thai_cu,
-                        'trang_thai_moi' => $trang_thai
+                        'trang_thai_cu' => $check_notice->trang_thai_cu, // Set trang_thai_cu to the value of $check_notice->trang_thai_cu
+                        'trang_thai_moi' => $trang_thai // Set trang_thai_moi to the value of $trang_thai
                     ]);
             } else {
+                // If $check_notice is falsy, insert a new row into the bs_trang_thai table
                 DB::table('bs_trang_thai')
                     ->insert([
-                        'id_don_hang' => $thong_tin_don_hang_old->id,
-                        'trang_thai_cu' => $thong_tin_don_hang_old->trang_thai,
-                        'trang_thai_moi' => $trang_thai,
-                        'email' => $thong_tin_don_hang_old->email_nguoi_nhan
+                        'id_don_hang' => $thong_tin_don_hang_old->id, // Set id_don_hang to the value of $thong_tin_don_hang_old->id
+                        'trang_thai_cu' => $thong_tin_don_hang_old->trang_thai, // Set trang_thai_cu to the value of $thong_tin_don_hang_old->trang_thai
+                        'trang_thai_moi' => $trang_thai, // Set trang_thai_moi to the value of $trang_thai
+                        'email' => $thong_tin_don_hang_old->email_nguoi_nhan // Set email to the value of $thong_tin_don_hang_old->email_nguoi_nhan
                     ]);
             }
         });

@@ -18,10 +18,10 @@ class EnsureAdminRole
      */
     public function handle(Request $request, Closure $next)
     {
-        if (Session::has('user_info')) {
-            $user_info = Session::get('user_info');
+        if (Session::has('user_admin')) {
+            $user_admin = Session::get('user_admin');
 
-            if ($user_info->id_loai_user >= 5) {
+            if ($user_admin->id_loai_user >= 5) {
                 return $next($request);
             } else {
                 return redirect('/login-admin');
