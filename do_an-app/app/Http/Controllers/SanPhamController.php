@@ -270,7 +270,7 @@ class SanPhamController extends Controller
             $query = $request->get('query');
             if ($query != '') {
                 $data = DB::table('bs_san_pham')
-                    ->where('ten_san_pham', 'like', '%' . $query . '%')
+                    ->where('gioi_thieu', 'like', '%' . $query . '%')
                     ->get();
             } else {
                 $data = DB::table('sb_search_null')

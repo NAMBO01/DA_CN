@@ -36,11 +36,13 @@ Route::post('/dang-ky', [
 
 Route::get('/login', 'App\Http\Controllers\UserController@login');
 
+/* A route that is used to login. */
 Route::post('/login', [
     "as" => "loginAccount",
     "uses" => "App\Http\Controllers\UserController@login_Account"
 ]);
-Route::post('/dang-nhap', [
+/* A route that is used to login. */
+ Route::post('/dang-nhap', [
     "as" => "loginAccount",
     "uses" => "App\Http\Controllers\UserController@login_Account"
 ]);

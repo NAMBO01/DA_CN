@@ -182,7 +182,7 @@ class UserController extends Controller
         $username = $request->input('ten_dang_nhap');
         $password = $request->input('mat_khau');
 
-     
+
         $user = DB::table('bs_thanh_vien')
             ->where('tai_khoan', $username)
             ->where('mat_khau', md5($password))
